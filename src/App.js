@@ -73,6 +73,15 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
+  const [loaderHidden, setLoaderHidden] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoaderHidden(true);
+      document.body.classList.remove('loading');
+    }, 2500);
+    document.body.classList.add('loading');
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const q = query(collection(db, COLLECTION), orderBy('fecha_registro', 'desc'));
@@ -160,6 +169,18 @@ export default function App() {
   return (
     <div className="app">
       <Toaster position="top-right" toastOptions={{ style: { zIndex: 9999 } }} />
+
+      {/* Preloader */}
+      <div className={`loader-wrapper${loaderHidden ? ' loader-hidden' : ''}`}>
+        <div className="loader-split-left"></div>
+        <div className="loader-split-right"></div>
+        <div className="loader-content">
+          <svg className="drawing-heart" viewBox="0 0 100 100">
+            <path d="M50,30 C10,10 10,60 50,90 C90,60 90,10 50,30 Z"></path>
+          </svg>
+          <div className="loader-text">M &amp; T</div>
+        </div>
+      </div>
 
       {showAddModal && (
         <AddGuestModal onClose={() => setShowAddModal(false)} onSuccess={handleAddSuccess} />
