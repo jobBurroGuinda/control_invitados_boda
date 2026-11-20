@@ -77,6 +77,7 @@ export default function EditMessageModal({ guest, onClose }) {
               placeholder="Escribe un mensaje para el invitado..."
               className={hasError ? 'input--error' : ''}
               autoFocus
+              maxLength={400}
             />
           </div>
           <button type="submit" className="modal-submit" disabled={saving}>

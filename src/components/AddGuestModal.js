@@ -19,10 +19,7 @@ const COLLECTION = 'invitaciones';
  */
 const MENSAJE_DEFAULT =
   `¡Nos da mucho gusto invitarte a compartir este día tan especial con nosotros!
-Tu presencia hará que nuestra boda sea aún más memorable.
-
-Con cariño,
-Misael & Tiatira`;
+Tu presencia hará que nuestra boda sea aún más memorable.`;
 
 /**
  * Retorna la fecha y hora actual ajustada a GMT-6 (Horario Central de México).
@@ -146,6 +143,7 @@ export default function AddGuestModal({ onClose, onSuccess }) {
               onChange={handleChange}
               placeholder="Escribe un mensaje para el invitado..."
               className={errors.mensaje_novios ? 'input--error' : ''}
+              maxLength={400}
             />
           </div>
           <button type="submit" className="modal-submit" disabled={saving}>
